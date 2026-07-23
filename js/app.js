@@ -465,7 +465,7 @@ function createWordReport(result) {
     const classification = classify(category.score);
     return `<tr>
       <td>${category.number}</td>
-      <td><strong>${esc(category.title)}</strong><br><span style="color:#64717d">${esc(category.focus)}</span></td>
+      <td><strong>${esc(category.title)}</strong><br><span style="color:#000000">${esc(category.focus)}</span></td>
       <td style="text-align:center"><strong>${category.score.toFixed(2)}</strong></td>
       <td>${classification.text}</td>
     </tr>`;
@@ -475,8 +475,8 @@ function createWordReport(result) {
     <tr>
       <td style="width:38%;padding:6px 8px">${category.number}. ${esc(category.title)}</td>
       <td style="width:52%;padding:6px 8px">
-        <div style="height:14px;background:#1b3042">
-          <div style="height:14px;width:${category.score / 5 * 100}%;background:#2f6b7c"></div>
+        <div style="height:14px;background:#e5e5e5">
+          <div style="height:14px;width:${category.score / 5 * 100}%;background:#555555"></div>
         </div>
       </td>
       <td style="width:10%;padding:6px 8px;text-align:right"><strong>${category.score.toFixed(2)}</strong></td>
@@ -485,7 +485,127 @@ function createWordReport(result) {
 
   const report = `<!DOCTYPE html>
   <html><head><meta charset="UTF-8">
-  </head><body>
+  <style>
+    @page Section1{
+      size:595.3pt 841.9pt;
+      margin:56.7pt 51pt 56.7pt 51pt;
+      mso-header-margin:28.35pt;
+      mso-footer-margin:28.35pt;
+    }
+    div.Section1{page:Section1}
+    html,body{
+      background:#ffffff;
+      color:#000000;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:10.5pt;
+      line-height:1.4;
+      margin:0;
+      padding:0;
+    }
+    *{
+      color:#000000;
+      text-shadow:none;
+      box-shadow:none;
+      filter:none;
+    }
+    .document{
+      width:100%;
+      margin:0;
+      padding:0;
+    }
+    .header{
+      background:#ffffff;
+      color:#000000;
+      padding:0 0 12pt;
+      border-bottom:1pt solid #777777;
+      margin-bottom:16pt;
+    }
+    .logos{
+      width:100%;
+      margin:0 0 12pt;
+      border-collapse:collapse;
+    }
+    .logos td{
+      border:0;
+      padding:0;
+      vertical-align:middle;
+    }
+    h1{
+      margin:0 0 5pt;
+      color:#000000;
+      font-size:22pt;
+      font-weight:bold;
+    }
+    h2{
+      margin:18pt 0 7pt;
+      color:#000000;
+      font-size:15pt;
+      page-break-after:avoid;
+    }
+    h3{
+      margin:10pt 0 5pt;
+      color:#000000;
+      font-size:12pt;
+      page-break-after:avoid;
+    }
+    p{
+      margin:0 0 8pt;
+      color:#000000;
+    }
+    .score{
+      margin:0 0 10pt;
+      color:#000000;
+      font-size:24pt;
+      font-weight:bold;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:0 0 12pt;
+      page-break-inside:auto;
+    }
+    tr{
+      page-break-inside:avoid;
+      page-break-after:auto;
+    }
+    th,td{
+      border:0.75pt solid #777777;
+      padding:6pt;
+      text-align:left;
+      vertical-align:top;
+      color:#000000;
+      background:#ffffff;
+    }
+    th{
+      background:#eeeeee;
+      color:#000000;
+      font-weight:bold;
+    }
+    .meta td{
+      border:0;
+      padding:3pt 10pt 3pt 0;
+      color:#000000;
+    }
+    .summary{
+      margin:0 0 12pt;
+      padding:9pt;
+      background:#f2f2f2;
+      border-left:3pt solid #555555;
+      color:#000000;
+      page-break-inside:avoid;
+    }
+    .footer{
+      margin-top:22pt;
+      padding-top:8pt;
+      border-top:0.75pt solid #999999;
+      color:#000000;
+      font-size:8.5pt;
+    }
+    a{
+      color:#000000;
+      text-decoration:underline;
+    }
+  </style></head><body><div class="Section1 document">
     <table class="logos"><tr>
       <td><img src="${PASSION_LOGO_DATA}" style="width:170px"></td>
       <td style="text-align:right"><img src="${VOLKER_LOGO_DATA}" style="width:72px"></td>
@@ -527,7 +647,7 @@ function createWordReport(result) {
 
     <h2>Persönliche Kursempfehlungen</h2>
     ${reportCourseRecommendations(result)}
-    <p style="font-size:11px;color:#64717d">
+    <p style="font-size:9pt;color:#000000">
       Stand der Kursprüfung gemäß bereitgestelltem Kurskatalog: 15.–16.07.2026.
       Termine, Preise und Verfügbarkeit können sich ändern.
     </p>
@@ -539,7 +659,7 @@ function createWordReport(result) {
       Methodischer Hinweis: Eine Kategorie unter 3,8 wird im Rahmen dieses Assessments als manifeste Skill-Lücke gewertet.
       Die Ergebnisse dienen der strukturierten Selbstreflexion und ersetzen keine individuelle Eignungsdiagnostik.
     </div>
-  </body></html>`;
+  </div></body></html>`;
 
   const blob = new Blob(["\ufeff", report], {type:"application/msword;charset=utf-8"});
   const filenameBase = (result.profile.name || "Executive-Self-Assessment")

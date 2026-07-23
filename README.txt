@@ -1,24 +1,16 @@
-EXECUTIVE SELF-ASSESSMENT – FERTIGES GITHUB-PAGES-PAKET
+EXECUTIVE SELF-ASSESSMENT - BERICHTSKORREKTUR
 
-Lade den INHALT dieses entpackten Ordners in dein bestehendes Repository hoch:
-annakudran-art/executiveassesment.github.io
+Neu:
+- PDF-Druck im A4-Hochformat
+- Seitenränder: oben/unten ca. 20 mm, links/rechts ca. 18 mm
+- weißer Hintergrund
+- schwarze Schrift
+- keine Text- oder Boxschatten im PDF
+- Word-Bericht mit A4-Seitenformat und dokumentgerechten Rändern
+- schwarze Schrift und keine Schatten im Word-Bericht
 
-Enthalten:
-- index.html
-- css/style.css
-- js/app.js
-- assets/images/executive-header.png
-- assets/logos/passion-for-people.png
-- assets/logos/volker-dahm.png
-
-Vorgehen:
-1. ZIP-Datei herunterladen.
-2. Auf dem Computer entpacken.
-3. Im bestehenden GitHub-Repository „Add file“ → „Upload files“ öffnen.
-4. Alle Dateien und Ordner aus dem entpackten Paket hochladen.
-5. Vorhandene Dateien ersetzen und „Commit changes“ wählen.
-6. Etwa 1–3 Minuten warten.
-7. Öffentlichen Link testen:
-   https://annakudran-art.github.io/executiveassesment.github.io/
-
-Der öffentliche Link bleibt unverändert.
+Upload:
+1. ZIP entpacken.
+2. Alle Dateien und Ordner in das bestehende GitHub-Repository hochladen.
+3. Vorhandene Dateien ersetzen.
+4. Commit changes.

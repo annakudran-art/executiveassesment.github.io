@@ -1,220 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Executive Self-Assessment mit 45 Fragen, Auswertung und Kursempfehlungen.">
 <title>Executive Self-Assessment – 45-Fragen-Audit</title>
-<meta name="description" content="Executive Self-Assessment mit 45 Fragen, automatischer Auswertung, Diagramm und persönlichem Ergebnisbericht.">
-
-  <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<main class="page">
-<section id="assessmentView">
-  <section class="hero">
-    <img class="brand-logo brand-logo-passion" src="assets/logos/passion-for-people.png" alt="Passion for People">
-    <img class="brand-logo brand-logo-volker" src="assets/logos/volker-dahm.png" alt="Volker Dahm">
-    <div class="hero-grid">
-      <div class="status" id="saveStatus">Antworten gespeichert</div>
-    </div>
-
-    <div style="position:relative;z-index:2;max-width:760px;margin-top:34px">
-      
-        <p class="kicker">Executive Self-Assessment</p>
+<main class="shell">
+  <section id="assessmentView">
+    <header class="hero">
+      <img class="logo logo-left" src="assets/logos/passion-for-people.png" alt="Passion for People">
+      <img class="logo logo-right" src="assets/logos/volker-dahm.png" alt="Volker Dahm">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="save-pill" id="saveStatus">Antworten gespeichert</div>
+        <p class="eyebrow">Executive Self-Assessment</p>
         <h1>Das 45-Fragen-Audit</h1>
-        <p><strong>Ihr 8-Minuten-Boxenstopp:</strong> Bewerten Sie nicht das strategische Wunschdenken, sondern die heute gelebte Realität in Ihrer Organisation. Nach dem Absenden erhalten Sie eine persönliche Auswertung mit Diagramm, Handlungsempfehlungen und einem Dokumentbericht.</p>
-
-    </div>
-
-    <div class="scale-info">
-      <div class="scale-chip"><strong>1 – Nie</strong>Massive Lücke / akuter Handlungsbedarf</div>
-      <div class="scale-chip"><strong>2 – Selten</strong>Teilweise Lücke</div>
-      <div class="scale-chip"><strong>3 – Manchmal</strong>Durchschnitt</div>
-      <div class="scale-chip"><strong>4 – Oft</strong>Stark ausgeprägt</div>
-      <div class="scale-chip"><strong>5 – Immer</strong>Absolute Meisterschaft / Best Practice</div>
-    </div>
-  </section>
-
-  <section class="dashboard" aria-label="Übersicht">
-    <div class="card">
-      <span class="label">Fortschritt</span>
-      <strong class="value" id="progressText">0 von 45</strong>
-      <div class="progress"><div id="progressBar"></div></div>
-    </div>
-    <div class="card"><span class="label">Aktueller Gesamtscore</span><strong class="value" id="overall">–</strong></div>
-    <div class="card"><span class="label">Beantwortete Kategorien</span><strong class="value" id="completeCategories">0 / 9</strong></div>
-    <div class="card"><span class="label">Zuletzt gespeichert</span><strong class="value" id="savedAt" style="font-size:1.05rem">–</strong></div>
-  </section>
-
-  <nav class="nav" id="categoryNav" aria-label="Kategorien"></nav>
-  <form id="surveyForm"></form>
-
-<section class="mobile-question-wizard" id="mobileQuestionWizard" aria-live="polite">
-  <article class="mobile-wizard-card">
-    <header class="mobile-wizard-header">
-      <p class="mobile-wizard-step" id="mobileWizardStep">Frage 1 von 45</p>
-      <h2 class="mobile-wizard-topic" id="mobileWizardTopic"></h2>
-      <p class="mobile-wizard-focus" id="mobileWizardFocus"></p>
+        <p class="hero-copy"><strong>Ihr 8-Minuten-Boxenstopp:</strong> Bewerten Sie die heute gelebte Realität Ihrer Organisation. Am Ende erhalten Sie eine persönliche Auswertung, Entwicklungsfelder und passende Kursempfehlungen.</p>
+      </div>
     </header>
 
-    <div class="mobile-wizard-body">
-      <span class="mobile-wizard-code" id="mobileWizardCode"></span>
-      <p class="mobile-wizard-question" id="mobileWizardQuestion"></p>
+    <section class="profile-card" id="profileStep">
+      <div>
+        <p class="eyebrow dark">Schritt 1</p>
+        <h2>Persönliche Angaben</h2>
+        <p class="muted">Name, Position und Unternehmen sind erforderlich. Die E-Mail-Adresse ist optional.</p>
+      </div>
+      <div class="profile-grid">
+        <label>Name<input id="participantName" autocomplete="name" placeholder="Vor- und Nachname"></label>
+        <label>Position / Funktion<input id="participantPosition" autocomplete="organization-title" placeholder="z. B. Geschäftsführung"></label>
+        <label>Unternehmen<input id="participantCompany" autocomplete="organization" placeholder="Unternehmensname"></label>
+        <label>E-Mail <span>(optional)</span><input id="participantEmail" type="email" autocomplete="email" placeholder="name@unternehmen.de"></label>
+      </div>
+      <button class="primary wide" id="profileContinue" type="button">Weiter zum Assessment</button>
+    </section>
 
-      <div class="mobile-rating-list" id="mobileWizardRatings"></div>
+    <section id="desktopAssessment" hidden>
+      <section class="dashboard">
+        <article><span>Fortschritt</span><strong id="progressText">0 von 45</strong><div class="progress"><i id="progressBar"></i></div></article>
+        <article><span>Gesamtscore</span><strong id="overallLive">–</strong></article>
+        <article><span>Kategorien vollständig</span><strong id="completeCategories">0 / 9</strong></article>
+        <article><span>Zuletzt gespeichert</span><strong id="savedAt">–</strong></article>
+      </section>
+      <nav class="category-nav" id="categoryNav"></nav>
+      <form id="surveyForm"></form>
+      <div class="desktop-actions">
+        <button class="danger" id="resetBtn" type="button">Alle Antworten löschen</button>
+        <button class="primary" id="desktopResultBtn" type="button">Ergebnis anzeigen</button>
+      </div>
+    </section>
 
-      <div class="mobile-wizard-progress">
-        <div class="mobile-wizard-progress-row">
-          <span id="mobileWizardCategoryProgress"></span>
-          <span id="mobileWizardOverallProgress"></span>
+    <section class="mobile-wizard" id="mobileWizard" hidden>
+      <article class="wizard-card">
+        <header>
+          <p id="mobileStep">Frage 1 von 45</p>
+          <h2 id="mobileTopic"></h2>
+          <span id="mobileFocus"></span>
+        </header>
+        <div class="wizard-body">
+          <b id="mobileCode"></b>
+          <p id="mobileQuestion"></p>
+          <div id="mobileRatings" class="rating-vertical"></div>
+          <div class="wizard-progress"><span id="mobileCategoryProgress"></span><span id="mobileTotalProgress"></span></div>
+          <div class="progress"><i id="mobileProgressBar"></i></div>
         </div>
-        <div class="mobile-wizard-progress-track">
-          <div class="mobile-wizard-progress-bar" id="mobileWizardProgressBar"></div>
-        </div>
+      </article>
+      <div class="wizard-footer">
+        <button class="secondary" id="mobilePrev" type="button">Zurück</button>
+        <button class="primary" id="mobileNext" type="button">Weiter zur nächsten Frage</button>
       </div>
-    </div>
-  </article>
-
-  <div class="mobile-wizard-nav">
-    <button type="button" id="mobilePrevQuestion" aria-label="Vorherige Frage">←</button>
-    <button type="button" id="mobileNextQuestion">Weiter zur nächsten Frage</button>
-  </div>
-</section>
-
-  <section class="submission-panel" id="submissionPanel">
-    <h2>Persönlichen Ergebnisbericht erstellen</h2>
-    <p>Bitte ergänzen Sie die Angaben für den Bericht. Nach dem Absenden werden alle neun Kategorien automatisch berechnet und auf einer eigenen Ergebnisseite dargestellt.</p>
-
-    <div class="profile-grid">
-      <div class="field">
-        <label for="participantName">Name</label>
-        <input id="participantName" autocomplete="name" placeholder="Vor- und Nachname">
-      </div>
-      <div class="field">
-        <label for="participantPosition">Position / Funktion</label>
-        <input id="participantPosition" autocomplete="organization-title" placeholder="z. B. Geschäftsführung">
-      </div>
-      <div class="field">
-        <label for="participantCompany">Unternehmen</label>
-        <input id="participantCompany" autocomplete="organization" placeholder="Unternehmensname">
-      </div>
-      <div class="field">
-        <label for="participantEmail">E-Mail für den Bericht <span style="font-weight:500">(optional)</span></label>
-        <input id="participantEmail" type="email" autocomplete="email" placeholder="name@unternehmen.de">
-      </div>
-    </div>
-
-    <div class="privacy-note">
-      <strong>Datenschutz:</strong>
-      <span>Die Auswertung und die Dokumenterstellung erfolgen lokal in diesem Browser. Ohne zusätzliche Server-Anbindung werden keine Daten automatisch übertragen.</span>
-    </div>
-
-    <div class="actions">
-      <button class="btn btn-danger" id="resetBtn" type="button">Alle Antworten löschen</button>
-      <button class="btn btn-gold" id="submitBtn" type="button" aria-controls="resultsView">Ergebnis absenden</button>
-    </div>
+    </section>
   </section>
 
-  <p class="note">Ihre Eingaben werden automatisch auf diesem Gerät gespeichert, bis Sie sie löschen.</p>
-</section>
-
-<section id="resultsView" hidden>
-  <section class="result-hero">
-    <img class="brand-logo brand-logo-passion" src="assets/logos/passion-for-people.png" alt="Passion for People">
-    <img class="brand-logo brand-logo-volker" src="assets/logos/volker-dahm.png" alt="Volker Dahm">
-    <p class="kicker">Persönlicher Ergebnisbericht</p>
-    <h1>Executive Self-Assessment</h1>
-    <p id="resultLead">Ihre Auswertung wurde erstellt.</p>
-    <div class="result-meta" id="resultMeta"></div>
-
-    
-  </section>
-
-  <section class="result-summary-grid">
-    <article class="panel score-overview">
-      <div class="score-circle" id="scoreCircle">
-        <div class="score-circle-content">
-          <strong id="finalOverall">–</strong>
-          <span>Gesamtscore von 5,0</span>
-        </div>
+  <section id="resultsView" hidden>
+    <header class="hero result-hero">
+      <img class="logo logo-left" src="assets/logos/passion-for-people.png" alt="Passion for People">
+      <img class="logo logo-right" src="assets/logos/volker-dahm.png" alt="Volker Dahm">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Persönlicher Ergebnisbericht</p>
+        <h1>Executive Self-Assessment</h1>
+        <p class="hero-copy" id="resultLead"></p>
+        <div class="result-meta" id="resultMeta"></div>
       </div>
-    </article>
+    </header>
 
-    <article class="panel summary-copy">
-      <span class="label">Zusammenfassung</span>
-      <h2 id="summaryTitle">Ihr Ergebnis</h2>
-      <p id="summaryText"></p>
-      <div class="summary-list">
-        <div class="summary-box">
-          <h3>Stärkste Kategorien</h3>
-          <p id="strengthText">–</p>
-        </div>
-        <div class="summary-box">
-          <h3>Prioritäre Entwicklungsfelder</h3>
-          <p id="developmentText">–</p>
-        </div>
-      </div>
-    </article>
-  </section>
+    <section class="result-top">
+      <article class="score-card">
+        <div class="score-ring" id="scoreRing"><div><strong id="finalOverall">–</strong><span>Gesamtscore von 5,0</span></div></div>
+      </article>
+      <article class="summary-card">
+        <p class="eyebrow dark">Zusammenfassung</p>
+        <h2 id="summaryTitle"></h2>
+        <p id="summaryText"></p>
+        <div class="summary-grid"><div><h3>Stärken</h3><p id="strengthText"></p></div><div><h3>Entwicklungsfelder</h3><p id="developmentText"></p></div></div>
+      </article>
+    </section>
 
-  <section class="panel chart-panel">
-    <h2>Kategorien im Vergleich</h2>
-    <div class="chart-legend">
-      <span><i class="legend-dot"></i>Kategorien-Score</span>
-      <span><i class="legend-line"></i>Skill-Gap-Schwelle 3,8</span>
-    </div>
-    <div class="chart" id="categoryChart"></div>
-  </section>
+    <section class="content-card"><h2>Kategorien im Vergleich</h2><p class="muted">Die gestrichelte Linie markiert die Skill-Gap-Schwelle von 3,8.</p><div id="categoryChart" class="chart"></div></section>
+    <section class="content-card"><h2>Detailauswertung</h2><div class="table-scroll"><table><thead><tr><th>Nr.</th><th>Kategorie</th><th>Score</th><th>Einordnung</th></tr></thead><tbody id="resultTableBody"></tbody></table></div></section>
+    <section class="content-card"><h2>Entwicklungsfelder & Anbieter-Zuordnung</h2><div id="recommendationGrid" class="cards-3"></div></section>
+    <section class="content-card"><h2>Ihre persönlichen Kursempfehlungen</h2><p id="courseIntro" class="muted"></p><div id="courseRecommendations"></div><p class="fineprint">Kursdaten stammen aus dem bereitgestellten Kompetenzvergleich. Termine und Verfügbarkeit können sich ändern.</p></section>
 
-  <section class="panel table-panel">
-    <h2>Detailauswertung</h2>
-    <div style="overflow-x:auto">
-      <table class="result-table">
-        <thead>
-          <tr><th>Nr.</th><th>Kategorie</th><th>Score</th><th>Einordnung</th></tr>
-        </thead>
-        <tbody id="resultTableBody"></tbody>
-      </table>
+    <div class="result-actions">
+      <button class="secondary" id="backBtn" type="button">Zurück zum Assessment</button>
+      <button class="secondary" id="emailBtn" type="button">E-Mail-Entwurf öffnen</button>
+      <button class="primary" id="wordBtn" type="button">Word-Bericht herunterladen</button>
+      <button class="primary" id="pdfBtn" type="button">Als PDF speichern / drucken</button>
     </div>
   </section>
-
-  <section class="panel recommendation-panel">
-    <h2>Entwicklungsfelder & Anbieter-Zuordnung</h2>
-    <div class="recommendation-grid" id="recommendationGrid"></div>
-  </section>
-
-  <section class="panel course-panel">
-    <h2>Ihre persönlichen Kursempfehlungen</h2>
-    <p class="course-intro" id="courseIntro"></p>
-    <span class="course-method">Automatische Auswahl anhand der niedrigsten Kategorien-Scores</span>
-    <div id="courseRecommendations"></div>
-    <p class="course-source-note">
-      Kursangaben stammen aus dem bereitgestellten Kompetenzvergleich. Termine, Preise,
-      Zugänglichkeit und Kursinhalte können sich nach dem jeweiligen Prüfdatum ändern.
-    </p>
-  </section>
-
-  <div class="report-actions">
-    <div class="action-group">
-      <button class="btn btn-secondary" id="backBtn" type="button">Zurück zum Fragebogen</button>
-      <button class="btn btn-secondary" id="emailBtn" type="button">E-Mail-Entwurf öffnen</button>
-    </div>
-    <div class="action-group">
-      <button class="btn btn-primary" id="wordBtn" type="button">Word-Bericht herunterladen</button>
-      <button class="btn btn-gold" id="pdfBtn" type="button">Als PDF speichern / drucken</button>
-    </div>
-  </div>
-</section>
 </main>
-
-
-<div class="mobile-step-nav" id="mobileStepNav">
-  <button type="button" id="mobileContinueBtn">Weiter</button>
-</div>
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-
-  <script src="js/app.js"></script>
-</body>
-</html>
+<div class="toast" id="toast"></div>
+<script src="js/app.js"></script>
+</body></html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Executive Self-Assessment mit 45 Fragen, Auswertung und Kursempfehlungen.">
-<title>Executive Self-Assessment – 45-Fragen-Audit</title>
+<title>Executive Self-Assessment v2.0 – 45-Fragen-Audit</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <div class="save-pill" id="saveStatus">Antworten gespeichert</div>
-        <p class="eyebrow">Executive Self-Assessment</p>
+        <div class="hero-kicker"><p class="eyebrow">Executive Self-Assessment</p><span class="version-badge">Version 2.0</span></div>
         <h1>Das 45-Fragen-Audit</h1>
-        <p class="hero-copy"><strong>Ihr 8-Minuten-Boxenstopp:</strong> Bewerten Sie die heute gelebte Realität Ihrer Organisation. Am Ende erhalten Sie eine persönliche Auswertung, Entwicklungsfelder und passende Kursempfehlungen.</p>
+        <p class="hero-copy"><strong>Ihr 8-Minuten-Boxenstopp:</strong> Bewerten Sie die heute gelebte Realität Ihrer Organisation. Am Ende erhalten Sie ein Executive Dashboard, priorisierte Entwicklungsfelder und Empfehlungen aus dem geprüften Kurskatalog.</p>
       </div>
     </header>
 
@@ -34,6 +34,10 @@
         <label>Unternehmen<input id="participantCompany" autocomplete="organization" placeholder="Unternehmensname"></label>
         <label>E-Mail <span>(optional)</span><input id="participantEmail" type="email" autocomplete="email" placeholder="name@unternehmen.de"></label>
       </div>
+      <div class="scale-guide" aria-label="Bewertungsskala">
+        <span><b>1</b> trifft nicht zu</span><span><b>2</b> trifft eher nicht zu</span><span><b>3</b> teilweise</span><span><b>4</b> trifft eher zu</span><span><b>5</b> trifft vollständig zu</span>
+      </div>
+      <p class="privacy-note">Ihre Eingaben bleiben in dieser Version ausschließlich lokal in Ihrem Browser. Es werden noch keine Daten an einen Server übertragen.</p>
       <button class="primary wide" id="profileContinue" type="button">Weiter zum Assessment</button>
     </section>
 
@@ -102,16 +106,17 @@
     <section class="content-card"><h2>Kategorien im Vergleich</h2><p class="muted">Die gestrichelte Linie markiert die Skill-Gap-Schwelle von 3,8.</p><div id="categoryChart" class="chart"></div></section>
     <section class="content-card"><h2>Detailauswertung</h2><div class="table-scroll"><table><thead><tr><th>Nr.</th><th>Kategorie</th><th>Score</th><th>Einordnung</th></tr></thead><tbody id="resultTableBody"></tbody></table></div></section>
     <section class="content-card"><h2>Entwicklungsfelder & Anbieter-Zuordnung</h2><div id="recommendationGrid" class="cards-3"></div></section>
-    <section class="content-card"><h2>Ihre persönlichen Kursempfehlungen</h2><p id="courseIntro" class="muted"></p><div id="courseRecommendations"></div><p class="fineprint">Kursdaten stammen aus dem bereitgestellten Kompetenzvergleich. Termine und Verfügbarkeit können sich ändern.</p></section>
+    <section class="content-card"><h2>Ihre persönlichen Kursempfehlungen</h2><p id="courseIntro" class="muted"></p><div id="courseRecommendations"></div><p class="fineprint">Die Kurslinks wurden zuletzt am 28.07.2026 geprüft. Termine, Preise und Verfügbarkeit können sich beim Anbieter später ändern.</p></section>
 
     <div class="result-actions">
-      <button class="secondary" id="backBtn" type="button">Zurück zum Assessment</button>
+      <button class="secondary" id="backBtn" type="button">Antworten überprüfen</button>
       <button class="secondary" id="emailBtn" type="button">E-Mail-Entwurf öffnen</button>
       <button class="primary" id="wordBtn" type="button">Word-Bericht herunterladen</button>
       <button class="primary" id="pdfBtn" type="button">Als PDF speichern / drucken</button>
     </div>
   </section>
 </main>
+<footer class="site-footer"><span>Executive Self-Assessment v2.0</span><span>45 Fragen · 9 Bewertungsdimensionen · geprüfter Kurskatalog</span></footer>
 <div class="toast" id="toast"></div>
 <script src="js/app.js"></script>
 </body></html>

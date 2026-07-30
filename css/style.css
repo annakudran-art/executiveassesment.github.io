@@ -11,3 +11,5 @@
 @media(max-width:900px){.scale-guide{grid-template-columns:1fr 1fr}.scale-guide span:last-child{grid-column:1/-1}}
 @media(max-width:768px){.scale-guide{grid-template-columns:1fr}.scale-guide span:last-child{grid-column:auto}.site-footer{width:calc(100% - 28px);margin:-8px auto 18px;display:block}.site-footer span{display:block;margin-top:5px}.hero-kicker{gap:8px}.version-badge{font-size:.68rem}}
 @media print{.site-footer,.verified-badge{display:none!important}.privacy-note,.scale-guide{display:none!important}}
+
+.priority-label{margin:0 0 6px;color:var(--gold2);font-size:.78rem;font-weight:850;text-transform:uppercase;letter-spacing:.035em}.competency-badge{display:inline-flex;align-self:flex-start;margin-bottom:9px;padding:5px 8px;border-radius:999px;background:rgba(113,151,181,.18);border:1px solid rgba(151,187,214,.38);color:#d8ebf7;font-size:.7rem;font-weight:850}.course-section+.course-section{margin-top:26px}.course-head h3{font-size:1.35rem}

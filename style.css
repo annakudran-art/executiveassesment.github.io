@@ -841,3 +841,104 @@ p,.q-text,.focus,.note{
 .report-footer{position:absolute;left:34px;right:34px;bottom:15px;padding-top:8px;border-top:1px solid var(--consulting-line);display:flex;justify-content:space-between;font-size:8.5px;color:#73818a;letter-spacing:.02em}.site-footer{text-align:center;padding:22px 12px;font-size:12px;color:#64717d;background:#fff;border-top:1px solid #e3e8eb}.pdf-exporting .report-page{box-shadow:none;margin:0}.pdf-exporting .screen-only,.pdf-exporting .site-footer{display:none!important}
 @media(max-width:900px){.executive-report{padding:0}.report-page{padding:20px;min-height:auto}.report-header{grid-template-columns:120px 1fr 80px}.report-grid-top,.strengths-grid,.next-steps-grid{grid-template-columns:1fr}.competency-cards,.roadmap-grid,.premium-course-grid .course-grid{grid-template-columns:1fr}.competency-visual{grid-template-columns:1fr}.report-footer{position:static;margin-top:18px}.report-title-row{grid-template-columns:1fr}.score-orbit{justify-self:center}}
 @media print{.report-page{width:297mm;height:210mm;min-height:210mm;box-shadow:none;margin:0!important;page-break-after:always}.report-page:last-child{page-break-after:auto}.report-actions,.site-footer{display:none!important}}
+
+
+/* ===== Executive Report isolation fix =====
+   Keeps website hero styles from affecting the white report pages. */
+.executive-report,
+.executive-report * {
+  text-shadow: none !important;
+}
+
+.executive-report {
+  color: #14202b !important;
+}
+
+.executive-report .report-page {
+  color: #14202b !important;
+  background: #ffffff !important;
+}
+
+/* Report logos use their own positioning context. */
+.executive-report .report-header .report-logo {
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: auto !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: 58px !important;
+  max-width: 180px !important;
+  object-fit: contain !important;
+  filter: none !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+.executive-report .report-header .report-logo-passion {
+  justify-self: start !important;
+  max-width: 180px !important;
+}
+
+.executive-report .report-header .report-logo-volker {
+  justify-self: end !important;
+  max-width: 90px !important;
+}
+
+/* Explicit report typography: no white-on-white inheritance. */
+.executive-report h1,
+.executive-report h2,
+.executive-report h3,
+.executive-report h4,
+.executive-report h5,
+.executive-report h6,
+.executive-report strong,
+.executive-report b {
+  color: #183b56 !important;
+}
+
+.executive-report p,
+.executive-report li,
+.executive-report small,
+.executive-report .report-meta,
+.executive-report .competency-card p,
+.executive-report .course-card p,
+.executive-report .course-meta,
+.executive-report .methodology,
+.executive-report .report-footer {
+  color: #62717b !important;
+}
+
+.executive-report .report-header-center span,
+.executive-report .eyebrow,
+.executive-report .card-kicker,
+.executive-report .roadmap-card h3 {
+  color: #2f6b7c !important;
+}
+
+.executive-report .score-orbit strong,
+.executive-report .competency-card-top strong {
+  color: #b08a4a !important;
+}
+
+.executive-report .consulting-card,
+.executive-report .competency-card,
+.executive-report .course-card {
+  background: #ffffff !important;
+}
+
+@media (max-width: 900px) {
+  .executive-report .report-header .report-logo {
+    max-height: 44px !important;
+  }
+  .executive-report .report-header .report-logo-passion {
+    max-width: 120px !important;
+  }
+  .executive-report .report-header .report-logo-volker {
+    max-width: 70px !important;
+  }
+}

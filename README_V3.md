@@ -1,19 +1,16 @@
-# Executive Self-Assessment V3.0
+Executive Assessment V3.1 - PDF-Korrektur
 
-Diese Version integriert den neuen Executive Report direkt in die bestehende Website.
+Geaendert wurden ausschliesslich die PDF-Ausgabe und die dazugehoerigen PDF-Styles:
 
-## Neue Funktionen
-- Executive Report im Look der abgestimmten Designvorlage
-- echte SVG-Kreisinfografik mit 9 Kompetenzsegmenten
-- Logos auf jeder Berichtseite
-- Executive Summary, Stärken und Entwicklungsfelder
-- zusammengeführte Vergleichs- und Detailauswertung
-- Kurskarten für bis zu 3 Prioritäten
-- NOW / NEXT / LATER Roadmap
-- optimierter PDF-Druck im A4-Querformat auf maximal 2 Seiten
+1. Der Executive Report wird garantiert als genau zwei A4-Seiten im Querformat erzeugt.
+2. Jede Seite wird einzeln gerendert; dadurch entstehen keine zusaetzlichen Leerseiten.
+3. Beide Logos stehen im Header von Seite 1 und Seite 2.
+4. Auf allen hellen Hintergruenden wird dunkle, lesbare Schrift erzwungen.
+5. Donut-Infografik, Kompetenzkarten, Roadmap und Kursempfehlungen bleiben erhalten.
+6. Fragen, Scoring, Inhalte und die restliche Website wurden nicht veraendert.
 
-## GitHub Pages
-`index.html` in das Root-Verzeichnis des bestehenden Repositories hochladen und die vorhandene Datei ersetzen.
+Technisch geaenderte Dateien:
+- report.js
+- style.css
 
-## PDF
-Assessment abschließen und auf „Executive Report als PDF speichern“ klicken. Im Browser als Ziel „Als PDF speichern“ wählen. Für das beste Ergebnis Hintergrundgrafiken aktivieren.
+Version: 3.1

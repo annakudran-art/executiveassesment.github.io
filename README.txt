@@ -1,14 +1,24 @@
-Executive Assessment V3 – CSS/HTML correction
+EXECUTIVE SELF-ASSESSMENT – VERSION 2.1
 
-Upload these files together to the root of your GitHub Pages repository:
-- index.html
-- style.css
-- report.js
+PHASE 1 – KOMPETENZ-MAPPING
+Strategy -> Strategy & Business Model Skills + Future Capability Skills
+Technical -> Technical & AI Literacy
+Governance -> Governance Skills
+Data -> Data & Analytics Skills
+Compliance -> Compliance Skills
+Leadership -> Team & Leadership Skills + Hybrid Work Skills
+Platform -> Platform & Strategic Tool Skills
+Soft Skills -> Soft Skills
+Change -> Change & Transformation Skills + Hybrid Work Skills + Future Capability Skills
 
-Main corrections:
-- Report logos are no longer absolutely positioned behind text.
-- Report typography is isolated from the dark website theme.
-- White report cards now use explicit dark text colors.
-- The professional footer remains unchanged.
+PHASE 2 – EMPFEHLUNGSENGINE
+- erkennt die drei schwächsten Assessment-Dimensionen
+- aktiviert die zugeordneten Kompetenzbereiche
+- zeigt bis zu vier Kurse je Kompetenzbereich
+- bevorzugt unterschiedliche Anbieter
+- verhindert Kursdubletten über alle Prioritäten
+- zeigt Kompetenzbereich, Auslöser und Score sichtbar an
+- übernimmt die neue Struktur in den Word-Bericht
 
-After upload, refresh the live page with Ctrl+F5 (Windows) or Cmd+Shift+R (Mac).
+GITHUB
+Den gesamten Inhalt dieses ZIP-Pakets in das bestehende Repository hochladen und vorhandene Dateien ersetzen.

@@ -1,24 +1,15 @@
-EXECUTIVE SELF-ASSESSMENT – VERSION 2.1
+EXECUTIVE ASSESSMENT V3.0 – GITHUB PAGES
 
-PHASE 1 – KOMPETENZ-MAPPING
-Strategy -> Strategy & Business Model Skills + Future Capability Skills
-Technical -> Technical & AI Literacy
-Governance -> Governance Skills
-Data -> Data & Analytics Skills
-Compliance -> Compliance Skills
-Leadership -> Team & Leadership Skills + Hybrid Work Skills
-Platform -> Platform & Strategic Tool Skills
-Soft Skills -> Soft Skills
-Change -> Change & Transformation Skills + Hybrid Work Skills + Future Capability Skills
+1. Entpacken Sie die ZIP-Datei.
+2. Laden Sie index.html, style.css und report.js gemeinsam in das Hauptverzeichnis Ihres GitHub-Pages-Repositories.
+3. Ersetzen Sie dort die bisherigen Dateien.
+4. Öffnen Sie die Seite nach dem Deployment und führen Sie einen Testdurchlauf durch.
 
-PHASE 2 – EMPFEHLUNGSENGINE
-- erkennt die drei schwächsten Assessment-Dimensionen
-- aktiviert die zugeordneten Kompetenzbereiche
-- zeigt bis zu vier Kurse je Kompetenzbereich
-- bevorzugt unterschiedliche Anbieter
-- verhindert Kursdubletten über alle Prioritäten
-- zeigt Kompetenzbereich, Auslöser und Score sichtbar an
-- übernimmt die neue Struktur in den Word-Bericht
+PDF-TECHNIK
+Der Button erzeugt die PDF direkt im Browser mit html2pdf.js. Es wird kein Druckdialog geöffnet und die Option „Hintergrundgrafiken“ ist nicht erforderlich. Die Bibliothek wird über cdnjs geladen; beim Erstellen der PDF ist daher eine Internetverbindung erforderlich.
 
-GITHUB
-Den gesamten Inhalt dieses ZIP-Pakets in das bestehende Repository hochladen und vorhandene Dateien ersetzen.
+FOOTER
+Confidential Executive Report | © 2026 Volker Dahm | Passion for People | All rights reserved
+
+WORD-EXPORT
+Der Word-Export wurde vollständig entfernt.

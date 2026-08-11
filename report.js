@@ -320,6 +320,7 @@ function renderResultPage(result) {
 
   renderCourseRecommendations(result);
   document.getElementById("emailBtn").disabled = !result.profile.email;
+  buildExecutiveReportEnhancements(result);
 }
 
 function openResults() {
@@ -603,14 +604,6 @@ function buildExecutiveReportEnhancements(result) {
       svg.appendChild(path); angle=end;
     });
   }
-}
-
-const originalRenderResults = typeof renderResults === 'function' ? renderResults : null;
-if (originalRenderResults) {
-  renderResults = function(result) {
-    originalRenderResults(result);
-    buildExecutiveReportEnhancements(result);
-  };
 }
 
 async function generateProfessionalPdf() {

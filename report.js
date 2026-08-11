@@ -622,16 +622,36 @@ async function generateProfessionalPdf() {
   try {
     const name=escapePdfFilename(latestResult.profile.name || 'Executive-Report');
     const pageEls = document.querySelectorAll('#pdfReport .report-page');
-    // Jede Report-Seite wird einzeln und unabhängig gerastert und als eigene
-    // PDF-Seite eingefügt. Dadurch entstehen keine zusätzlichen Leerseiten und
-    // kein doppelt gerenderter ("Geister-")Text mehr, wie es bei automatischer
-    // Mehrseiten-Zerlegung passieren konnte.
     const pdf = new jsPDFCtor({unit:'mm', format:'a4', orientation:'landscape'});
+    const pageWidthMM = 297, pageHeightMM = 210;
+
+    // Jede Report-Seite wird einzeln in ihrer tatsächlichen (variablen) Höhe
+    // gerastert und danach in so viele A4-Seiten zerschnitten, wie der Inhalt
+    // wirklich braucht. Das funktioniert unabhängig davon, ob jemand 0 oder 6
+    // Kursempfehlungen bekommt, oder ob der Fließtext kurz oder lang ist – es
+    // wird nie etwas abgeschnitten oder überlappt, ohne dass CSS-Werte für
+    // jeden Einzelfall von Hand angepasst werden müssen.
+    let isFirstPdfPage = true;
     for (let i=0;i<pageEls.length;i++){
-      const canvas = await canvasFn(pageEls[i], {scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,letterRendering:true});
-      const imgData = canvas.toDataURL('image/jpeg',0.98);
-      if (i>0) pdf.addPage('a4','landscape');
-      pdf.addImage(imgData,'JPEG',0,0,297,210);
+      const sourceCanvas = await canvasFn(pageEls[i], {scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,letterRendering:true});
+      const pxPerMM = sourceCanvas.width / pageWidthMM;
+      const sliceHeightPx = Math.round(pageHeightMM * pxPerMM);
+      let offsetY = 0;
+      while (offsetY < sourceCanvas.height) {
+        const thisSliceHeightPx = Math.min(sliceHeightPx, sourceCanvas.height - offsetY);
+        const sliceCanvas = document.createElement('canvas');
+        sliceCanvas.width = sourceCanvas.width;
+        sliceCanvas.height = thisSliceHeightPx;
+        const ctx = sliceCanvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0,0,sliceCanvas.width,sliceCanvas.height);
+        ctx.drawImage(sourceCanvas, 0, offsetY, sourceCanvas.width, thisSliceHeightPx, 0, 0, sourceCanvas.width, thisSliceHeightPx);
+        const imgData = sliceCanvas.toDataURL('image/jpeg',0.98);
+        if (!isFirstPdfPage) pdf.addPage('a4','landscape');
+        isFirstPdfPage = false;
+        pdf.addImage(imgData,'JPEG',0,0,pageWidthMM, thisSliceHeightPx / pxPerMM);
+        offsetY += thisSliceHeightPx;
+      }
     }
     pdf.save(`${name}-Executive-Report.pdf`);
     showToast('Der Executive Report wurde als PDF erstellt.');

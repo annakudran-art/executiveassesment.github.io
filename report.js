@@ -608,7 +608,9 @@ function buildExecutiveReportEnhancements(result) {
 
 async function generateProfessionalPdf() {
   if (!latestResult) return;
-  if (typeof html2pdf === 'undefined') {
+  const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
+  const canvasFn = window.html2canvas;
+  if (!jsPDFCtor || !canvasFn) {
     showToast('PDF-Modul konnte nicht geladen werden. Bitte Internetverbindung prüfen und erneut versuchen.');
     return;
   }
@@ -619,36 +621,19 @@ async function generateProfessionalPdf() {
   document.body.classList.add('pdf-exporting');
   try {
     const name=escapePdfFilename(latestResult.profile.name || 'Executive-Report');
-    const jsPDFCtor = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
-    const canvasFn = window.html2canvas;
     const pageEls = document.querySelectorAll('#pdfReport .report-page');
-
-    if (jsPDFCtor && canvasFn && pageEls.length) {
-      // Jede Report-Seite wird einzeln und unabhängig gerastert und als eigene
-      // PDF-Seite eingefügt. Dadurch entstehen keine zusätzlichen Leerseiten und
-      // kein doppelt gerenderter ("Geister-")Text mehr, wie es bei html2pdf's
-      // automatischer Mehrseiten-Zerlegung passieren konnte.
-      const pdf = new jsPDFCtor({unit:'mm', format:'a4', orientation:'landscape'});
-      for (let i=0;i<pageEls.length;i++){
-        const canvas = await canvasFn(pageEls[i], {scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,letterRendering:true});
-        const imgData = canvas.toDataURL('image/jpeg',0.98);
-        if (i>0) pdf.addPage('a4','landscape');
-        pdf.addImage(imgData,'JPEG',0,0,297,210);
-      }
-      pdf.save(`${name}-Executive-Report.pdf`);
-    } else {
-      // Fallback, falls html2canvas/jsPDF nicht als eigene globale Objekte
-      // verfügbar sind: automatische html2pdf-Zerlegung wie zuvor.
-      const element=document.getElementById('pdfReport');
-      await html2pdf().set({
-        margin:0,
-        filename:`${name}-Executive-Report.pdf`,
-        image:{type:'jpeg',quality:0.98},
-        html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,letterRendering:true},
-        jsPDF:{unit:'mm',format:'a4',orientation:'landscape'},
-        pagebreak:{mode:['css'],before:'.report-page-two'}
-      }).from(element).save();
+    // Jede Report-Seite wird einzeln und unabhängig gerastert und als eigene
+    // PDF-Seite eingefügt. Dadurch entstehen keine zusätzlichen Leerseiten und
+    // kein doppelt gerenderter ("Geister-")Text mehr, wie es bei automatischer
+    // Mehrseiten-Zerlegung passieren konnte.
+    const pdf = new jsPDFCtor({unit:'mm', format:'a4', orientation:'landscape'});
+    for (let i=0;i<pageEls.length;i++){
+      const canvas = await canvasFn(pageEls[i], {scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,letterRendering:true});
+      const imgData = canvas.toDataURL('image/jpeg',0.98);
+      if (i>0) pdf.addPage('a4','landscape');
+      pdf.addImage(imgData,'JPEG',0,0,297,210);
     }
+    pdf.save(`${name}-Executive-Report.pdf`);
     showToast('Der Executive Report wurde als PDF erstellt.');
   } catch (error) {
     console.error(error);

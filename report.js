@@ -266,7 +266,7 @@ function renderResultPage(result) {
     `Erstellt: ${new Intl.DateTimeFormat("de-DE",{dateStyle:"medium",timeStyle:"short"}).format(result.createdAt)}`
   ].filter(Boolean);
 
-  document.getElementById("resultMeta").innerHTML = meta.map(item => `<span>${esc(item)}</span>`).join("");
+  document.getElementById("resultMeta").innerHTML = meta.map(item => `<span>${esc(item)}</span>`).join(" &nbsp;·&nbsp; ");
   document.getElementById("finalOverall").textContent = result.overall.toFixed(2);
   document.getElementById("scoreCircle").style.setProperty("--score-angle", `${result.overall / 5 * 360}deg`);
   document.getElementById("summaryTitle").textContent = result.narrative.title;
@@ -626,7 +626,7 @@ async function generateProfessionalPdf() {
       image:{type:'jpeg',quality:0.98},
       html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,letterRendering:true},
       jsPDF:{unit:'mm',format:'a4',orientation:'landscape'},
-      pagebreak:{mode:['css','legacy'],before:'.report-page-two'}
+      pagebreak:{mode:['css'],before:'.report-page-two'}
     }).from(element).save();
     showToast('Der Executive Report wurde als PDF erstellt.');
   } catch (error) {

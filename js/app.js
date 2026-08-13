@@ -9,7 +9,8 @@ const COURSE_REVIEW_DATE = "28.07.2026";
 const STORAGE_KEY = "execAssessmentProductionV21";
 const PROFILE_KEY = "execProfileProductionV21";
 const SAVED_KEY = "execSavedProductionV21";
-
+const SUPABASE_URL = "https://yfdacrcmonfjvlswbmui.supabase.co";
+const SUPABASE_KEY = "sb_publishable_EljKhLofFSi0HAU6vxz5Tg_ttD7au7m";
 
 // Version 2.1: feste Zuordnung der 9 Assessment-Dimensionen zu allen 11 Kurs-Kompetenzbereichen.
 const assessmentCourseMapping = {
@@ -349,6 +350,51 @@ function createResult() {
   };
 }
 
+
+async function saveResultToSupabase(result) {
+  const categoryScores = Object.fromEntries(
+    result.categories.map((category) => [category.id, category.score])
+  );
+
+  const recommendations = result.gaps.length
+    ? getCourseGroups(result)
+    : [];
+
+  const payload = {
+    name: result.profile.name || null,
+    position: result.profile.position || null,
+    company: result.profile.company || null,
+    email: result.profile.email || null,
+    answers: answers,
+    category_scores: categoryScores,
+    total_score: result.overall,
+    result_level: result.narrative.title,
+    recommendations: recommendations,
+    pdf_status: "pending"
+  };
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/assessment_results`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) {
+      console.error("Supabase Fehler:", await response.text());
+    }
+  } catch (error) {
+    console.error("Supabase Verbindung fehlgeschlagen:", error);
+  }
+}
 function normaliseCourseKey(course) {
   return `${course.provider}|${course.course_name}|${course.url}`.toLowerCase().trim();
 }
@@ -516,6 +562,7 @@ function renderResults(result) {
 function showResults() {
   if (!isMobile() && !validateDesktopAssessment()) return;
   latestResult = createResult();
+  saveResultToSupabase(latestResult);
   renderResults(latestResult);
   $("assessmentView").hidden = true;
   $("resultsView").hidden = false;

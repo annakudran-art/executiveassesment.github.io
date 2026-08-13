@@ -9,6 +9,9 @@ const STORAGE_KEY = "executiveSelfAssessment45_v2";
 const SAVED_KEY = "executiveSelfAssessment45_savedAt_v2";
 const PROFILE_KEY = "executiveSelfAssessment45_profile_v2";
 
+const SUPABASE_URL = "https://yfdacrcmonfjvlswbmui.supabase.co";
+const SUPABASE_KEY = "sb_publishable_EljKhLofFSi0HAU6vxz5Tg_ttD7au7m";
+
 const assessmentView = document.getElementById("assessmentView");
 const resultsView = document.getElementById("resultsView");
 const form = document.getElementById("surveyForm");
@@ -323,6 +326,50 @@ function renderResultPage(result) {
   buildExecutiveReportEnhancements(result);
 }
 
+async function saveResultToSupabase(result) {
+  const categoryScores = Object.fromEntries(
+    result.categories.map((category) => [category.id, category.score])
+  );
+
+  const recommendations = result.gaps.length
+    ? getCourseRecommendations(result)
+    : [];
+
+  const payload = {
+    name: result.profile.name || null,
+    position: result.profile.position || null,
+    company: result.profile.company || null,
+    email: result.profile.email || null,
+    answers: answers,
+    category_scores: categoryScores,
+    total_score: result.overall,
+    result_level: result.narrative.title,
+    recommendations: recommendations,
+    pdf_status: "pending"
+  };
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/assessment_results`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) {
+      console.error("Supabase Fehler:", await response.text());
+    }
+  } catch (error) {
+    console.error("Supabase Verbindung fehlgeschlagen:", error);
+  }
+}
+
 function openResults() {
   if (!validateComplete()) return;
 
@@ -339,6 +386,8 @@ function openResults() {
   assessmentView.hidden = true;
   resultsView.hidden = false;
   window.scrollTo({top:0,behavior:"smooth"});
+
+  saveResultToSupabase(latestResult);
 }
 
 function backToSurvey() {
